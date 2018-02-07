@@ -56,3 +56,10 @@ mybatis-plus:
 #logging
 logging:
   level: warn
+
+mqtt-config:
+    host: 39.108.119.215
+    port: 1883
+    clientId: test
+    username: lsh
+

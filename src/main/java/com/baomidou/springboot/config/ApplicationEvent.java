@@ -1,6 +1,6 @@
-package com.geetion.catcher.gateway.config;
+package com.baomidou.springboot.config;
 
-import com.geetion.catcher.gateway.service.IEmqService;
+import com.baomidou.springboot.service.IEMQtest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
@@ -20,13 +20,14 @@ public class ApplicationEvent implements ApplicationListener<ContextRefreshedEve
     protected final static Logger logger = LoggerFactory.getLogger(ApplicationEvent.class);
 
     @Resource
-    private IEmqService emqService;
+    private IEMQtest emqService;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         emqService.initMqConfig();
+        logger.info("MQTT开启中");
        // 开启MQTT
-       if (emqService.connectSubMq() && emqService.connectPubMq()) {
+       if (emqService.connectSubMq() ) {
             logger.info("开启MQTT成功");
         }
     }
