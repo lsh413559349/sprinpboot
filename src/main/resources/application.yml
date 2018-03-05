@@ -1,6 +1,6 @@
 #app
 server:
-    port: 8080
+    port: 80
 
 #spring
 spring:
@@ -60,6 +60,6 @@ logging:
 mqtt-config:
     host: 39.108.119.215
     port: 1883
-    clientId: test
-    username: lsh
+    clientId: lsh_1
+    username: lsh_1
 
