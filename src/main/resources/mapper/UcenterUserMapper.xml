@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+		<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baomidou.springboot.mapper.UcenterUserMapper">
+
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+		id,
+		login_name AS loginName,
+		pass_word AS  passWork,
+		salt,
+		nickname,
+		sex,
+		avatar,
+		count,
+		last_login_time AS lastLoginTime,
+		last_login_ip AS lastLoginIp,
+		created,
+		updated,
+		delete_flag AS deleteFlag
+	</sql>
+
+</mapper>
