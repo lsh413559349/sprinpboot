@@ -1,6 +1,6 @@
 #app
 server:
-    port: 80
+    port: 8088
 
 #spring
 spring:
@@ -8,25 +8,27 @@ spring:
     restart:
       enabled: false
 
-  # H2 DATABASE CONFIG
+# MYSQL DATABASE CONFIG
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://wz97cdz71j5490nr21o.mysql.rds.aliyuncs.com/springboot?characterEncoding=UTF-8
+#    schema: classpath:/db/schema-h2.sql
+#    data: classpath:/db/data-h2.sql
+    url: jdbc:mysql://rm-wz97cdz71j5490nr21o.mysql.rds.aliyuncs.com/springboot?characterEncoding=UTF-8
     username: root
     password: Asd123456
     platform: mysql
     initialize: true
-        continue-on-error: true
-        driver-class-name: com.mysql.jdbc.Driver
-      jpa:
-        database: MYSQL
-        show-sql: true
-        hibernate:
-          ddl-auto: update
-          naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
-        properties:
-          hibernate:
-            dialect: org.hibernate.dialect.MySQL5Dialect
+    continue-on-error: true
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
 
 #mybatis
 mybatis-plus:
