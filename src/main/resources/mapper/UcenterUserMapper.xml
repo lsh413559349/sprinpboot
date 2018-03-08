@@ -6,7 +6,7 @@
 	<sql id="Base_Column_List">
 		id,
 		login_name AS loginName,
-		pass_word AS  passWork,
+		pass_word AS  passWord,
 		salt,
 		nickname,
 		sex,

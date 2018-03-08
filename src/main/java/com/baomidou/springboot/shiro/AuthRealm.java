@@ -24,9 +24,8 @@ public class AuthRealm extends AuthorizingRealm {
             throws AuthenticationException {
         UsernamePasswordToken utoken=(UsernamePasswordToken) token;//获取用户输入的token
         String loginUserName = utoken.getUsername();
-        UcenterUser user =
-                ucenterUserService.selectOne(new EntityWrapper<UcenterUser>()
-                .where("delete_flag={0} and login_name={1}", "NORMAL", loginUserName));
+        UcenterUser user = ucenterUserService.
+                selectOne(new EntityWrapper<UcenterUser>().where("delete_flag={0} and login_name={1}", "NORMAL", loginUserName));
         return new SimpleAuthenticationInfo(user, user.getPassWork(),this.getClass().getName());
     }
 }

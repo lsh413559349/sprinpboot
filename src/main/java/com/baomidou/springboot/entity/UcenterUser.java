@@ -5,7 +5,7 @@ import java.util.Date;
 public class UcenterUser {
     private Integer id;
     private String loginName;
-    private String passWork;
+    private String passWord;
     private String salt;
     private String nickname;
     private Integer sex;
@@ -21,7 +21,7 @@ public class UcenterUser {
                        Date lastLoginTime, String lastLoginIp, Date created, Date updated, String deleteFlag) {
         this.id = id;
         this.loginName = loginName;
-        this.passWork = passWork;
+        this.passWord = passWork;
         this.salt = salt;
         this.nickname = nickname;
         this.sex = sex;
@@ -32,6 +32,9 @@ public class UcenterUser {
         this.created = created;
         this.updated = updated;
         this.deleteFlag = deleteFlag;
+    }
+
+    public UcenterUser() {
     }
 
     public Integer getId() {
@@ -51,11 +54,11 @@ public class UcenterUser {
     }
 
     public String getPassWork() {
-        return passWork;
+        return passWord;
     }
 
     public void setPassWork(String passWork) {
-        this.passWork = passWork;
+        this.passWord = passWork;
     }
 
     public String getSalt() {
@@ -143,7 +146,7 @@ public class UcenterUser {
         return "UcenterUser{" +
                 "id=" + id +
                 ", loginName='" + loginName + '\'' +
-                ", passWork='" + passWork + '\'' +
+                ", passWork='" + passWord + '\'' +
                 ", salt='" + salt + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", sex=" + sex +
