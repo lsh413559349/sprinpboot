@@ -1,7 +1,7 @@
 #restart.sh
 #!/bin/bash
 echo "Restarting SpringBoot Application"
-pid=`ps -ef | grep asset.jar | grep -v grep | awk '{print $2}'`
+pid=`ps -ef | grep mybatisplus-spring-boot-1.0.jar | grep -v grep | awk '{print $2}'`
 if [ -n "$pid" ]
 then
    kill -9 $pid
