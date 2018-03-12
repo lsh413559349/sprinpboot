@@ -9,6 +9,6 @@ then
 fi
 
 echo "授予当前用户权限"
-chmod 777 /root/.jenkins/workspace/springboot/mybatisplus-spring-boot-1.0.jar
+chmod 777 /root/.jenkins/workspace/springboot/target/mybatisplus-spring-boot-1.0.jar
 echo "执行....."
-java -jar /root/.jenkins/workspace/springboot/mybatisplus-spring-boot-1.0.jar
+java -jar /root/.jenkins/workspace/springboot/target/mybatisplus-spring-boot-1.0.jar
