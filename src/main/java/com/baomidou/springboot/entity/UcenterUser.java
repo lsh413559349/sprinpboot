@@ -53,12 +53,12 @@ public class UcenterUser {
         this.loginName = loginName;
     }
 
-    public String getPassWork() {
+    public String getPassWord() {
         return passWord;
     }
 
-    public void setPassWork(String passWork) {
-        this.passWord = passWork;
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
     }
 
     public String getSalt() {

@@ -1,30 +1,40 @@
 package com.baomidou.springboot.shiro;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.springboot.Util.MD5Util;
-import com.baomidou.springboot.entity.UcenterUser;
-import com.baomidou.springboot.service.IUcenterUserService;
+
+import com.baomidou.springboot.entity.enums.MapDbEnum;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CredentialsMatcher extends SimpleCredentialsMatcher {
-    @Autowired
-    private IUcenterUserService ucenterUserService;
+    private ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(100);
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
-        UsernamePasswordToken utoken=(UsernamePasswordToken) token;
-        String inPassword = new String(utoken.getPassword());
-        String loginUserName = utoken.getUsername();
-        UcenterUser user =
-                ucenterUserService.selectOne(new EntityWrapper<UcenterUser>()
-                        .where("delete_flag={0} and login_name={1}", "NORMAL", loginUserName));
-        String salt = user.getSalt();
-        String md5Str = inPassword + salt;
-        String isPassword = MD5Util.getMD5(md5Str);
-        String dbPassword=(String) info.getCredentials();
-        return this.equals(isPassword, dbPassword);
+        String username = (String) token.getPrincipal();
+        AtomicInteger atomicInteger =(AtomicInteger) MapDbEnum.MAPDB.get(username);
+        if(atomicInteger == null){
+            atomicInteger = new AtomicInteger(0);
+            MapDbEnum.MAPDB.put(username,atomicInteger);
+        }
+        if(atomicInteger.incrementAndGet()>3){
+           /* //10分钟后消除
+            executorService.schedule(()->{
+                MapDbEnum.MAPDB.remove(username);
+            },1000*10, TimeUnit.MILLISECONDS);*/
+            throw new ExcessiveAttemptsException("连续登录超过3次密码不正确，请10秒后登录");
+        }
+        boolean b = super.doCredentialsMatch(token, info);
+        if(b){
+            MapDbEnum.MAPDB.remove(username);
+        }else{
+            MapDbEnum.MAPDB.put(username,atomicInteger);
+        }
+        return b;
     }
 }

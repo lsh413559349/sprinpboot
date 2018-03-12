@@ -26,6 +26,6 @@ public class AuthRealm extends AuthorizingRealm {
         String loginUserName = utoken.getUsername();
         UcenterUser user = ucenterUserService.
                 selectOne(new EntityWrapper<UcenterUser>().where("delete_flag={0} and login_name={1}", "NORMAL", loginUserName));
-        return new SimpleAuthenticationInfo(user, user.getPassWork(),this.getClass().getName());
+        return new SimpleAuthenticationInfo(user, user.getPassWord(),this.getClass().getName());
     }
 }

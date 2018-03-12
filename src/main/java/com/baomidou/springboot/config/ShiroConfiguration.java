@@ -27,6 +27,8 @@ public class ShiroConfiguration {
         LinkedHashMap<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
         filterChainDefinitionMap.put("/jsp/login.jsp*", "anon"); //表示可以匿名访问
         filterChainDefinitionMap.put("/loginUser", "anon");
+        filterChainDefinitionMap.put("/testMapDB", "anon");
+        filterChainDefinitionMap.put("/removeMapDB", "anon");
         filterChainDefinitionMap.put("/user/test", "anon");
         filterChainDefinitionMap.put("/logout*","anon");
         filterChainDefinitionMap.put("/jsp/error.jsp*","anon");
